@@ -1,6 +1,8 @@
 package com.example.csc532dsproject.Models;
 
-public class Source {
+import java.io.Serializable;
+
+public class Source implements Serializable {
     String id="";
     String name="";
 
