@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                 else
                 if (CategoryCount==7)
                 {
-                    Toast.makeText(MainActivity.this, "No data found!" +CategoryCount , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "No data found!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             }
