@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     ProgressDialog dialog;
     Button b1,b2,b3,b4,b5,b6,b7;
     SearchView searchView;
+    public int CategoryCount;
+    public String Guery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Guery= query;
+                CategoryCount=0;
+
                 dialog.setTitle("Fetching news articles of "+query);
                 dialog.show();
 
@@ -81,11 +86,52 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
 
         @Override
         public void onFechData(List<NewsHeadlines> list, String message) {
-           if (list.isEmpty())
-           {
-               Toast.makeText(MainActivity.this, "No data found!", Toast.LENGTH_SHORT).show();
-               dialog.dismiss();
-           }
+            if (list.isEmpty())
+            {
+                CategoryCount=CategoryCount+1;
+
+                if (CategoryCount==1)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "business", Guery);
+                }
+                else
+                if (CategoryCount==2)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "entertainment", Guery);
+                }
+                else
+                if (CategoryCount==3)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "health", Guery);
+                }
+                else
+                if (CategoryCount==4)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "science", Guery);
+                }
+                else
+                if (CategoryCount==5)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "sports", Guery);
+                }
+                else
+                if (CategoryCount==6)
+                {
+                    RequestManager manager = new RequestManager(MainActivity.this);
+                    manager.getNewsHeadlines(listener, "technology", Guery);
+                }
+                else
+                if (CategoryCount==7)
+                {
+                    Toast.makeText(MainActivity.this, "No data found!" +CategoryCount , Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
            else
            {
                showNews(list);
