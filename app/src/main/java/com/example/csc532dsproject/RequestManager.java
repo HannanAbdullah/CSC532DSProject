@@ -21,10 +21,10 @@ public class RequestManager {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public void getNewsHeadlines(OnFetchDataListener listener, String category, String query )
+    public void getNewsHeadlines(OnFetchDataListener listener,String country, String category, String query )
     {
         CallNewsApi callNewsApi = retrofit.create(CallNewsApi.class);
-        Call <NewsApiResponse> call = callNewsApi.callHeadlines("sa",category, query,context.getString(R.string.api_key));
+        Call <NewsApiResponse> call = callNewsApi.callHeadlines(country,category, query,context.getString(R.string.api_key));
 
         try{
             call.enqueue(new Callback <NewsApiResponse>()

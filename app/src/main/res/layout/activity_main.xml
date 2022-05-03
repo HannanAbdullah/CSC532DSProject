@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/countrySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"/>
+
     <HorizontalScrollView
         android:layout_margin="6dp"
         android:layout_width="match_parent"
@@ -74,20 +80,22 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+
     </HorizontalScrollView>
 
+
     <androidx.cardview.widget.CardView
-        android:layout_margin="14dp"
-        app:cardElevation="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            app:defaultQueryHint="search for News"
-            app:iconifiedByDefault="false"
+            android:layout_margin="14dp"
+            app:cardElevation="8dp"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                app:defaultQueryHint="search for News"
+                app:iconifiedByDefault="false"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
 
     </androidx.cardview.widget.CardView>
 

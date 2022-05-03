@@ -1,4 +1,40 @@
 <resources>
     <string name="app_name">N.News</string>
     <string name="api_key">9a161884f6dd4f7e90be913be5b5882a</string>
+    <string-array name="country_array">
+        <item>Last News of Saudi Arabia</item>
+        <item>Last News of United Arab Emirates</item>
+        <item>Last News of Argentina</item>
+        <item>Last News of Australia</item>
+        <item>Last News of Belgium</item>
+        <item>Last News of Brazil</item>
+        <item>Last News of Switzerland</item>
+        <item>Last News of china</item>
+        <item>Last News of Cuba</item>
+        <item>Last News of Germany</item>
+        <item>Last News of Egypt</item>
+        <item>Last News of France</item>
+        <item>Last News of United Kingdom</item>
+        <item>Last News of Hong Kong</item>
+        <item>Last News of Indonesia</item>
+        <item>Last News of Ireland</item>
+        <item>Last News of India</item>
+        <item>Last News of Italy</item>
+        <item>Last News of Japan</item>
+        <item>Last News of Korea</item>
+        <item>Last News of Morocco</item>
+        <item>Last News of Mexico</item>
+        <item>Last News of Malaysia</item>
+        <item>Last News of Nigeria</item>
+        <item>Last News of New Zealand</item>
+        <item>Last News of Philippines</item>
+        <item>Last News of Poland</item>
+        <item>Last News of Portugal</item>
+        <item>Last News of Russian Federation</item>
+        <item>Last News of Sweden</item>
+        <item>Last News of Singapore</item>
+        <item>Last News of Thailand</item>
+        <item>Last News of Turkey</item>
+        <item>Last News of Ukraine</item>
+    </string-array>
 </resources>

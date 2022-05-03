@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.csc532dsproject.Models.NewsApiResponse;
@@ -27,16 +31,145 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     ProgressDialog dialog;
     Button b1,b2,b3,b4,b5,b6,b7;
     SearchView searchView;
+    Spinner CountrySpinner;
     public int CategoryCount;
     public String Guery;
-
+    public String Country;
+    public String Category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dialog = new ProgressDialog(this);
-        dialog.setTitle("Fetching last news articles in KSA");
+        dialog.setTitle("Fetching last news articles in SA");
         dialog.show();
+        Country="sa";
+        CountrySpinner= findViewById(R.id.countrySpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_spinner_dropdown_item,
+                getResources().getStringArray(R.array.country_array));
+        CountrySpinner.setAdapter(adapter);
+        CountrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dialog.setTitle("Fetching last news articles in "+(String) parent.getItemAtPosition(position));
+                dialog.show();
+                switch (position)
+                {
+                    case 0:
+                        Country="sa";
+                        break;
+                    case 1:
+                        Country="ae";
+                        break;
+                    case 2:
+                        Country="ar";
+                        break;
+                    case 3:
+                        Country="au";
+                        break;
+                    case 4:
+                        Country="be";
+                        break;
+                    case 5:
+                        Country="br";
+                        break;
+                    case 6:
+                        Country="ch";
+                        break;
+                    case 7:
+                        Country="cn";
+                        break;
+                    case 8:
+                        Country="cu";
+                        break;
+                    case 9:
+                        Country="de";
+                        break;
+                    case 10:
+                        Country="eg";
+                        break;
+                    case 11:
+                        Country="fr";
+                        break;
+                    case 12:
+                        Country="gb";
+                        break;
+                    case 13:
+                        Country="hk";
+                        break;
+                    case 14:
+                        Country="id";
+                        break;
+                    case 15:
+                        Country="ie";
+                        break;
+                    case 16:
+                        Country="in";
+                        break;
+                    case 17:
+                        Country="it";
+                        break;
+                    case 18:
+                        Country="jp";
+                        break;
+                    case 19:
+                        Country="kr";
+                        break;
+                    case 20:
+                        Country="ma";
+                        break;
+                    case 21:
+                        Country="mx";
+                        break;
+                    case 22:
+                        Country="my";
+                        break;
+                    case 23:
+                        Country="ng";
+                        break;
+                    case 24:
+                        Country="NZ";
+                        break;
+                    case 25:
+                        Country="ph";
+                        break;
+                    case 26:
+                        Country="pl";
+                        break;
+                    case 27:
+                        Country="pt";
+                        break;
+                    case 28:
+                        Country="ru";
+                        break;
+                    case 29:
+                        Country="se";
+                        break;
+                    case 30:
+                        Country="sg";
+                        break;
+                    case 31:
+                        Country="th";
+                        break;
+                    case 32:
+                        Country="tr";
+                        break;
+                    case 33:
+                        Country="ua";
+                        break;
+                }//switch
+
+                RequestManager manager = new RequestManager(MainActivity.this);
+                manager.getNewsHeadlines(listener, Country,"general", Guery);
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -50,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                 dialog.show();
 
                 RequestManager manager = new RequestManager(MainActivity.this);
-                manager.getNewsHeadlines(listener,"general", query);
+                manager.getNewsHeadlines(listener,Country,"general", query);
                 return true;
             }
 
@@ -77,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
         b7.setOnClickListener(this);
 
         RequestManager manager = new RequestManager(this);
-        manager.getNewsHeadlines(listener,"general", null);
+        manager.getNewsHeadlines(listener,Country,"general", null);
 
     }
 
@@ -93,37 +226,37 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                 if (CategoryCount==1)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "business", Guery);
+                    manager.getNewsHeadlines(listener,Country, "business", Guery);
                 }
                 else
                 if (CategoryCount==2)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "entertainment", Guery);
+                    manager.getNewsHeadlines(listener, Country,"entertainment", Guery);
                 }
                 else
                 if (CategoryCount==3)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "health", Guery);
+                    manager.getNewsHeadlines(listener, Country,"health", Guery);
                 }
                 else
                 if (CategoryCount==4)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "science", Guery);
+                    manager.getNewsHeadlines(listener,Country, "science", Guery);
                 }
                 else
                 if (CategoryCount==5)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "sports", Guery);
+                    manager.getNewsHeadlines(listener,Country, "sports", Guery);
                 }
                 else
                 if (CategoryCount==6)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, "technology", Guery);
+                    manager.getNewsHeadlines(listener,Country, "technology", Guery);
                 }
                 else
                 if (CategoryCount==7)
@@ -164,11 +297,14 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     @Override
     public void onClick(View view) {
         Button button = (Button) view;
-        String category = button.getText().toString();
-        dialog.setTitle("Fetching last news articles of "+category);
+        Category = button.getText().toString();
+        dialog.setTitle("Fetching last news articles of "+Category);
         dialog.show();
 
         RequestManager manager = new RequestManager(this);
-        manager.getNewsHeadlines(listener,category, null);
+        manager.getNewsHeadlines(listener,Country,Category, null);
     }
+
+
+
 }
