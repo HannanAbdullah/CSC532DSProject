@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">N.News</string>
+    <string name="app_name"></string>
     <string name="api_key">9a161884f6dd4f7e90be913be5b5882a</string>
     <string-array name="country_array">
         <item>Last News of Saudi Arabia</item>
