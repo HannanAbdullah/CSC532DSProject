@@ -1,23 +1,19 @@
 package com.example.csc532dsproject;
 
-import static java.sql.DriverManager.println;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.csc532dsproject.Models.NewsApiResponse;
 import com.example.csc532dsproject.Models.NewsHeadlines;
@@ -33,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     SearchView searchView;
     Spinner CountrySpinner;
     public int CategoryCount;
-    public String Guery;
+    public String Query;
     public String Country;
     public String Category;
     @Override
@@ -45,14 +41,14 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
         dialog.show();
         Country="sa";
         CountrySpinner= findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.country_array));
         CountrySpinner.setAdapter(adapter);
         CountrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dialog.setTitle("Fetching last news articles in "+(String) parent.getItemAtPosition(position));
+                dialog.setTitle("Fetching last news articles in "+ parent.getItemAtPosition(position));
                 dialog.show();
                 switch (position)
                 {
@@ -164,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                 }//switch
 
                 RequestManager manager = new RequestManager(MainActivity.this);
-                manager.getNewsHeadlines(listener, Country,"general", Guery);
+                manager.getNewsHeadlines(listener, Country,"general", Query);
                 dialog.dismiss();
             }
 
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Guery= query;
+                Query= query;
                 CategoryCount=0;
 
                 dialog.setTitle("Fetching news articles of "+query);
@@ -229,37 +225,37 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                 if (CategoryCount==1)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener,Country, "business", Guery);
+                    manager.getNewsHeadlines(listener,Country, "business", Query);
                 }
                 else
                 if (CategoryCount==2)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, Country,"entertainment", Guery);
+                    manager.getNewsHeadlines(listener, Country,"entertainment", Query);
                 }
                 else
                 if (CategoryCount==3)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener, Country,"health", Guery);
+                    manager.getNewsHeadlines(listener, Country,"health", Query);
                 }
                 else
                 if (CategoryCount==4)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener,Country, "science", Guery);
+                    manager.getNewsHeadlines(listener,Country, "science", Query);
                 }
                 else
                 if (CategoryCount==5)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener,Country, "sports", Guery);
+                    manager.getNewsHeadlines(listener,Country, "sports", Query);
                 }
                 else
                 if (CategoryCount==6)
                 {
                     RequestManager manager = new RequestManager(MainActivity.this);
-                    manager.getNewsHeadlines(listener,Country, "technology", Guery);
+                    manager.getNewsHeadlines(listener,Country, "technology", Query);
                 }
                 else
                 if (CategoryCount==7)
@@ -277,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
 
         @Override
         public void onError(String message) {
-            Toast.makeText(MainActivity.this, "An Error Occured!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "An Error Occurred!", Toast.LENGTH_SHORT).show();
         }
     };
 
