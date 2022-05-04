@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="8dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:outlineSpotShadowColor="@color/yellow"
+    app:cardCornerRadius="30dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_margin="6dp"
         android:weightSum="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:orientation="vertical"
@@ -24,7 +27,7 @@
                 android:id="@+id/text_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/lightBlue"
                 android:maxLines="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -32,7 +35,7 @@
                 android:id="@+id/text_source"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/green"
                 android:maxLines="1"
                 android:layout_marginTop="6dp"
                 android:layout_width="match_parent"
@@ -43,9 +46,12 @@
             android:id="@+id/img_headline"
             android:src="@drawable/not_available"
             android:scaleType="centerCrop"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:outlineAmbientShadowColor="@color/yellow"
+            app:cardCornerRadius="30dp"/>
 
     </LinearLayout>
 

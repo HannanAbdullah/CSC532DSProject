@@ -3,6 +3,7 @@ package com.example.csc532dsproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +26,9 @@ public class DetailsActivity extends AppCompatActivity {
         txt_time=findViewById(R.id.text_details_time);
         txt_detail=findViewById(R.id.text_details_detail);
         txt_content =findViewById(R.id.text_details_content);
+        txt_content.setMovementMethod(new ScrollingMovementMethod());
         img_news=findViewById(R.id.img_details_news);
+
 
         headlines = (NewsHeadlines) getIntent().getSerializableExtra("data");
 

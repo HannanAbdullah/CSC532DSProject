@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dialog = new ProgressDialog(this);
-        dialog.setTitle("Fetching last news articles in SA");
+        dialog.setTitle("Fetching last news articles of SA");
         dialog.show();
         Country="sa";
         CountrySpinner= findViewById(R.id.countrySpinner);
@@ -157,6 +157,9 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                         break;
                     case 33:
                         Country="ua";
+                        break;
+                    case 34:
+                        Country="us";
                         break;
                 }//switch
 

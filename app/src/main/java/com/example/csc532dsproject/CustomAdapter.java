@@ -1,5 +1,6 @@
 package com.example.csc532dsproject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.headline_list_items,parent,false)) ;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
        holder.text_title.setText(headlines.get(position).getTitle());
