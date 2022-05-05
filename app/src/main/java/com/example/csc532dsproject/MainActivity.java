@@ -1,9 +1,11 @@
 package com.example.csc532dsproject;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     ProgressDialog dialog;
     Button b1,b2,b3,b4,b5,b6,b7;
     SearchView searchView;
-    Spinner CountrySpinner;
+    public static Spinner CountrySpinner;
+    public static int CountryPosition=-1;
     public int CategoryCount;
     public String Query;
     public String Country;
@@ -36,20 +39,27 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("");
         dialog = new ProgressDialog(this);
         dialog.setTitle("Fetching last news articles of SA");
         dialog.show();
-        Country="sa";
+
+        if (CountryPosition==-1)
+           CountryPosition=0;
+
         CountrySpinner= findViewById(R.id.countrySpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.country_array));
         CountrySpinner.setAdapter(adapter);
+        CountrySpinner.setSelection(CountryPosition);
+
         CountrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dialog.setTitle("Fetching last news articles in "+ parent.getItemAtPosition(position));
                 dialog.show();
+                CountryPosition=position;
                 switch (position)
                 {
                     case 0:
@@ -159,9 +169,14 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                         break;
                 }//switch
 
+                 if (Category==null)
+                     Category="general";
+
                 RequestManager manager = new RequestManager(MainActivity.this);
-                manager.getNewsHeadlines(listener, Country,"general", Query);
+                manager.getNewsHeadlines(listener, Country,Category, Query);
                 dialog.dismiss();
+
+
             }
 
             @Override
@@ -177,6 +192,8 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
             public boolean onQueryTextSubmit(String query) {
                 Query= query;
                 CategoryCount=0;
+                closeKeyboard();
+                searchView.setQuery("", false);
 
                 dialog.setTitle("Fetching news articles of "+query);
                 dialog.show();
@@ -211,6 +228,16 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
         RequestManager manager = new RequestManager(this);
         manager.getNewsHeadlines(listener,Country,"general", null);
 
+    }
+
+    private void closeKeyboard()
+    {
+        View view=this.getCurrentFocus();
+        if (view!= null)
+        {
+            InputMethodManager imm = (InputMethodManager) getSystemService((Context.INPUT_METHOD_SERVICE));
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 
     private  final OnFetchDataListener <NewsApiResponse> listener = new OnFetchDataListener <NewsApiResponse>()
@@ -269,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
                showNews(list);
                dialog.dismiss();
            }
+
         }
 
         @Override
@@ -305,5 +333,15 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
     }
 
 
+    protected void onPause() {
+        super.onPause();
+    }
 
+    protected void onResume() {
+        super.onResume();
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+    }
 }

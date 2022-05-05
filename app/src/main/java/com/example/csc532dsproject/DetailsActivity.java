@@ -1,7 +1,9 @@
 package com.example.csc532dsproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
@@ -16,10 +18,15 @@ public class DetailsActivity extends AppCompatActivity {
     TextView txt_title, txt_author, txt_time, txt_detail,txt_content;
     ImageView img_news;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("News Details");
 
         txt_title=findViewById(R.id.text_details_title);
         txt_author=findViewById(R.id.text_details_author);
@@ -38,5 +45,6 @@ public class DetailsActivity extends AppCompatActivity {
         txt_detail.setText(headlines.getDescription());
         txt_content.setText(headlines.getContent());
         Picasso.get().load(headlines.getUrlToImage()).into(img_news);
+
     }
 }
