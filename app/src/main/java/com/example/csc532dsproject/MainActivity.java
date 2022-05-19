@@ -45,7 +45,11 @@ public class MainActivity extends AppCompatActivity implements SelectListner, Vi
         dialog.show();
 
         if (CountryPosition==-1)
-           CountryPosition=0;
+        {
+            CountryPosition = 0;
+            Country="sa";
+        }
+
 
         CountrySpinner= findViewById(R.id.countrySpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
